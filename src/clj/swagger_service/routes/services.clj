@@ -81,8 +81,8 @@
 
 
 
-
-
+(defn parse-xml [xml]
+  (-> xml .getBytes io/input-stream xml/parse))
 
 (defn get-links [link-count]
   (-> "http://thecatapi.com/api/images/get?format=xml&results_per_page=" 
@@ -91,12 +91,9 @@
       :body
       parse-xml))
 
-(i/inspect-tree (get-links 1))
+;(i/inspect-tree (get-links 1))
 
 (require '[clojure.inspector :as i])
 
 ;(i/inspect-tree (get-links 3))
-
-(defn parse-xml [xml]
-  (-> xml .getBytes io/input-stream xml/parse))
   
