@@ -10,8 +10,6 @@
 (defn get-first-child [tag xml-node]
   (->> xml-node :content (filter #(= (:tag %) tag)) first))
 
-<<<<<<< HEAD
-=======
 (defn parse-link [link]
   (->> link (get-first-child :url) :content first))
 
@@ -22,31 +20,21 @@
        :content
        (map parse-link)))
 
->>>>>>> origin/master
 (defn parse-xml [xml]
   (-> xml .getBytes io/input-stream xml/parse))
 
 (defn get-links [link-count]
-  (-> "http://thecatapi.com/api/images/get?format=xml&results_per_page=" 
+  (-> "http://thecatapi.com/api/images/get?format=xml&results_per_page="
       (str link-count)
       client/get
       :body
-<<<<<<< HEAD
-      parse-xml))
-
-;(i/inspect-tree (get-links 1))
-=======
       parse-xml
       parse-links))
->>>>>>> origin/master
 
-;(i/inspect-tree (get-links 1))
 
-<<<<<<< HEAD
-;(i/inspect-tree (get-links 3))
-  
-=======
 ;(require '[clojure.inspector :as i])
+;(i/inspect-tree (get-links 1))
+;(i/inspect-tree (get-links 1))
 
 (defapi service-routes
   {:swagger
@@ -63,4 +51,3 @@
               :summary "returns a collection of image links"
               :return [s/Str]
               (ok (get-links link-count)))))
->>>>>>> origin/master
